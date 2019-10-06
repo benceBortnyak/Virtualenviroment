@@ -14,9 +14,9 @@ Vagrant.configure("2") do |config|
   # boxes at https://vagrantcloud.com/search.
   config.vm.box = "hashicorp/precise64"
   config.vm.provision :shell, path: "provision.sh"
-  config.vm.network :forwarded_port, guest: 2222, host: 50022
   config.vm.provision "file", source: "~/.ssh/id_rsa.pub", destination: "~/.ssh/id_rsa.pub"
-
+  config.vm.network :forwarded_port, guest: 2222, host: 50000
+  
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
