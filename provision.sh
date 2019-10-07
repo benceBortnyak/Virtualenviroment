@@ -9,5 +9,3 @@ echo "Port 2222" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 
 restart ssh
-
-cat ~vagrant/.ssh/id_rsa.pub >> ~vagrant/.ssh/authorized_keys
