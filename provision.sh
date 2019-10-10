@@ -1,6 +1,7 @@
 #!/bin/sh
 
 sudo useradd -m -p $(openssl passwd -1 admin) admin -N -g vagrant
+sudo adduser admin sudo
     su admin
 
 sed '/Port/d' /etc/ssh/sshd_config

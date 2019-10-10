@@ -1,0 +1,9 @@
+[Unit]
+Description=jenkins
+
+[Service]
+ExecStart=/usr/bin/java -jar /usr/share/jenkins/jenkins.war -Dpermissive-script-security.enabled=true
+User=admin
+
+[Install]
+WantedBy=multi-user.target
