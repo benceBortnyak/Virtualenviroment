@@ -4,10 +4,10 @@ sudo useradd -m -p $(openssl passwd -1 admin) admin -N -g vagrant
 sudo adduser admin sudo
     su admin
 
-sed '/Port/d' /etc/ssh/sshd_config
-sed '/PermitRootLogin/d' /etc/ssh/sshd_config
-sed '/PasswordAuthentication/d' /etc/ssh/sshd_config
-echo "Port 2222" >> /etc/ssh/sshd_config
+sed -i '/Port/d' /etc/ssh/sshd_config
+sed -i '/PermitRootLogin/d' /etc/ssh/sshd_config
+sed -i '/PasswordAuthentication/d' /etc/ssh/sshd_config
+#echo "Port 2222" >> /etc/ssh/sshd_config
 echo "PermitRootLogin yes" >> /etc/ssh/sshd_config
 echo "PasswordAuthentication no" >> /etc/ssh/sshd_config
 su admin

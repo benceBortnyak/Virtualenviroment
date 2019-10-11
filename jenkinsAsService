@@ -2,7 +2,7 @@
 Description=jenkins
 
 [Service]
-ExecStart=/usr/bin/java -jar /usr/share/jenkins/jenkins.war -Dpermissive-script-security.enabled=true
+ExecStart=/usr/bin/java -jar /usr/share/jenkins -Dpermissive-script-security.enabled=true
 User=admin
 
 [Install]

@@ -15,7 +15,7 @@ Vagrant.configure("2") do |config|
   config.vm.box = "bento/ubuntu-18.04"
   config.vm.provision :shell, path: "provision.sh"
   config.vm.provision :shell, path: "install.sh"
-  config.vm.network :forwarded_port, guest: 2222, host: 50000
+  config.vm.network :forwarded_port, guest: 2222, host: 2222
   config.vm.network :forwarded_port, guest: 8080, host: 50005
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs

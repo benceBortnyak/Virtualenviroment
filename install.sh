@@ -16,14 +16,18 @@ sudo chown -R admin /usr/share/jenkins
 sudo usermod -a -G jenkins admin
 sudo usermod -a -G vagrant admin
 su admin
-pass=$(sudo cat /var/lib/jenkins/secrets/initialAdminPassword)
-$wget http://localhost:8080/jnlpJars/jenkins-cli.jar
 
 sudo touch  /etc/systemd/system/jenkins.service
-sudo cat /vagrant/jenkinsAsService >>  /usr/lib/systemd/system/jenkins.service
-sudo systemctl daemon-reload
-systemctl restart jenkins.service
-java -jar /vagrant/jenkins-cli.jar -auth admin:$pass -s http://localhost:8080/ install-plugin job-dsl
-java -jar /vagrant/jenkins-cli.jar -auth admin:$pass -s http://localhost:8080/ install-plugin permissive-script-security
-java -jar jenkins-cli.jar -auth admin:$pass -s http://localhost:8080/ create-job < /vagrant/config.xml
-systemctl restart jenkins.service
+cat /vagrant/jenkinsAsService >> /etc/systemd/system/jenkins.service
+systemctl daemon-reload
+systemctl unmask jenkins
+systemctl restart jenkins
+sudo mkdir -p /usr/lib/systemd/system
+
+sleep 100
+pass=$(sudo -i cat /var/lib/jenkins/secrets/initialAdminPassword)
+echo $pass > /vagrant/pass.txt
+wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+java -jar jenkins-cli.jar -auth admin:$pass -s http://localhost:8080/ install-plugin job-dsl
+java -jar jenkins-cli.jar -auth admin:$pass -s http://localhost:8080/ install-plugin permissive-script-security
+java -jar jenkins-cli.jar -auth admin:$pass -s http://localhost:8080/ create-job SeedJob < /vagrant/config.xml
